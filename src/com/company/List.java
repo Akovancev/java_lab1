@@ -65,4 +65,14 @@ public class List {
         count--;
     }
 
+    public int get(int num) {
+        if (num > this.getCount()) {
+            return 0;
+        }
+        List l = new List(this.getData(), this.getNext());
+        for (int i = 1; i < num; i++) {
+            l = l.getNext();
+        }
+        return l.getData();
+    }
 }
