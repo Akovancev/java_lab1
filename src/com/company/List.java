@@ -9,16 +9,16 @@ public class List {
         return this.data;
     }
 
-    public int getCount() {
-        return count;
+    public void setData(int data) {
+        this.data = data;
     }
+
+    public int getCount() { return count; }
+
+    private void setCount(int count) { this.count = count; }
 
     public List getNext() {
         return this.next;
-    }
-
-    public void setData(int data) {
-        this.data = data;
     }
 
     public void setNext(List next) {
@@ -26,53 +26,51 @@ public class List {
     }
 
     public List() {
-        setData(0);
-        next = null;
-        count = 1;
+        setData(-1);
+        setCount(0);
     }
 
     public List(int data) {
         setData(data);
-        count = 1;
+        setCount(1);
     }
 
     public List(int data, List next) {
         setData(data);
         setNext(next);
-        count = 1;
+        setCount(1);
     }
 
     public void Add(int data) {
+        if (this.getCount() == 0)
+            this.setData(data);
         List l = new List(this.getData(), this.getNext());
-        setData(data);
-        setNext(l);
-        count++;
+        this.setData(data);
+        this.setNext(l);
+        this.setCount(this.getCount() + 1);
     }
 
     public void Delete() {
         if (this.getCount() == 1) {
-            setData(0);
-            setNext(null);
-            count = 0;
+            this.setData(-1);
+            this.setNext(null);
+            this.setCount(0);
             return;
         }
-        if (this.getCount() == 0) {
+        if (this.getCount() == 0)
             return;
-        }
         List l = this.getNext();
-        setData(l.getData());
-        setNext(l.getNext());
-        count--;
+        this.setData(l.getData());
+        this.setNext(l.getNext());
+        this.setCount(this.getCount() - 1);
     }
 
     public int get(int num) {
-        if (num > this.getCount()) {
-            return 0;
-        }
+        if (num > this.getCount())
+            return -1;
         List l = new List(this.getData(), this.getNext());
-        for (int i = 1; i < num; i++) {
+        for (int i = 1; i < num; i++)
             l = l.getNext();
-        }
         return l.getData();
     }
 }
